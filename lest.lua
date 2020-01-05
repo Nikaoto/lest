@@ -211,7 +211,69 @@ lest.expect = function(value)
                print_fail_reason(string.format("%s is not a subset of %s", value, superset_table))
             end
          end
-      end
+      end,
+      ["not_"] = {
+         to_be = function(expected_value)
+            local equal
+
+            if type(value) == "table" then
+               equal = table_equals(value, expected_value)
+            else
+               equal = (value == expected_value)
+            end
+
+            if not equal then
+               pass_count = pass_count + 1
+               print_result(pass_prefix, file_name, line_number, line_content)
+            else
+               fail_count = fail_count + 1
+               print_result(fail_prefix, file_name, line_number, line_content)
+
+               -- Print fail reason
+               local value_type = type(value)
+               --- Mismatched types
+               if value_type ~= type(expected_value) then
+                  print_fail_reason("Types match")
+                  return
+               end
+
+               --- Mismatched values
+               local message
+               if value_type == "table" then
+                  message = "Tables match"
+               elseif value_type == "number" then
+                  message = string.format(
+                     "Didn't expect %.2f, got %.2f",
+                     expected_value, value)
+               else
+                  message = string.format(
+                     "Didn't expect %q, got %q",
+                     tostring(expected_value), tostring(value))
+               end
+
+               print_fail_reason(message)
+            end
+         end,
+
+         -- When A subsets B, A is a subset of B, meaning B is a superset of A
+         to_subset = function(superset_table)
+            if type(value) ~= "table" or type(superset_table) ~= "table" then
+               fail_count = fail_count + 1
+               print_result(fail_prefix, file_name, line_number, line_content)
+               print_fail_reason("to_subset() used on non-table value")
+            else
+               -- Check if value is a subset of superset_table
+               if not table_subsets(value, superset_table) then
+                  pass_count = pass_count + 1
+                  print_result(pass_prefix, file_name, line_number, line_content)
+               else
+                  fail_count = fail_count + 1
+                  print_result(fail_prefix, file_name, line_number, line_content)
+                  print_fail_reason(string.format("%s is a subset of %s", value, superset_table))
+               end
+            end
+         end,
+      }
    }
 end
 
