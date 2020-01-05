@@ -194,25 +194,6 @@ lest.expect = function(value)
          end
       end,
 
-      -- When A supersets B, A is a superset of B, meaning B is a subset of A
-      to_superset = function(subset_table)
-         if type(value) ~= "table" or type(subset_table) ~= "table" then
-            fail_count = fail_count + 1
-            print_result(fail_prefix, file_name, line_number, line_content)
-            print_fail_reason("to_superset() used on non-table value")
-         else
-            -- Check if subset_table is a subset of value
-            if table_subsets(subset_table, value) then
-               pass_count = pass_count + 1
-               print_result(pass_prefix, file_name, line_number, line_content)
-            else
-               fail_count = fail_count + 1
-               print_result(fail_prefix, file_name, line_number, line_content)
-               print_fail_reason(string.format("%s is not a superset of %s", value, subset_table))
-            end
-         end
-      end,
-
       -- When A subsets B, A is a subset of B, meaning B is a superset of A
       to_subset = function(superset_table)
          if type(value) ~= "table" or type(superset_table) ~= "table" then
