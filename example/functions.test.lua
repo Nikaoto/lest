@@ -9,6 +9,11 @@ local lest = require ("lest")
 local expect = lest.expect
 local group = lest.group
 
+expect(1).to_be(1)
+expect(1).not_.to_be(2)
+expect({1, 2, 3}).to_subset({1, 2, 3, 4})
+expect({1, 2, 3}).not_.to_subset({1, 3, 2, 4})
+expect({1, 2, 3}).to_be({1, 2, 3})
 expect(funcs.fib(1)).to_be(0)
 expect(funcs.fib(2)).to_be(1)
 expect(funcs.fib(20)).to_be(4181)
