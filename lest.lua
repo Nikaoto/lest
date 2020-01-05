@@ -71,16 +71,11 @@ local function print_fail_reason(msg)
    print(string.format("%s%s", fail_reason_indentation, msg))
 end
 
--- Return true if tbl1 is a subset of tbl2 and vice versa
+-- Return true if tbl1 subsets and supersets tbl2
 local function table_equals(tbl1, tbl2)
    if type(tbl1) ~= "table" or type(tbl2) ~= "table" then
       return false
    end
-
-   -- TODO use table_subsets function here
-   -- if not table_subsets(tbl1, tbl2) then
-   --    return false
-   -- end
 
    -- Check tbl1 subset of tbl2
    for k, v1 in pairs(tbl1) do
@@ -127,7 +122,7 @@ local function table_subsets(tbl1, tbl2)
 
       -- Check if child tables are subsets
       if type(v1) == "table" then
-         if not table_subsets(v1, v2) then
+         if not table_equals(v1, v2) then
             return false
          end
       else
