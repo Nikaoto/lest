@@ -48,7 +48,7 @@ local pass_count = 0
 local fail_count = 0
 
 local function truncate_line(line, max)
-   max = max or 70
+   max = max or 110
    if #line > max then
       return line:sub(1, max - 3) .. "..."
    end
@@ -57,12 +57,14 @@ end
 
 local function print_result(prefix, file_name, line_number, line_content)
    print(
-      string.format(
-         "%s %s:%i %s",
-         prefix,
-         file_name,
-         line_number,
-         truncate_line(line_content)
+      truncate_line(
+         string.format(
+            "%s %s:%i %s",
+            prefix,
+            file_name,
+            line_number,
+            line_content
+         )
       )
    )
 end
