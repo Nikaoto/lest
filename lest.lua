@@ -279,7 +279,9 @@ end
 
 lest.group = function(group_name, func)
    print("\n" .. color_bold .. group_name .. color_end)
-   func()
+   if func then
+      func()
+   end
 end
 
 lest.get_stats = function()
