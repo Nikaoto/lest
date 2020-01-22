@@ -1,7 +1,7 @@
 # lest
 Minimal testing library for Lua.
 
-Check [examples/functions.test.lua](./examples/functions.test.lua) for exemplary usage.
+Check [example/functions.test.lua](./example/functions.test.lua) for exemplary usage.
 
 ## Install
 Simply copy and require `lest.lua`. Here's a one-liner that downloads
