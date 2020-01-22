@@ -2,7 +2,6 @@
 
 package.path = package.path .. ";../?.lua"
 
-local print_table = require ("print_table")
 local funcs = require ("example/functions")
 local lest = require ("lest")
 
