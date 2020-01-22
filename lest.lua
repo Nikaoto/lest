@@ -172,11 +172,6 @@ lest.expect = function(value)
 
             -- Print fail reason
             local value_type = type(value)
-            --- Mismatched types
-            if value_type ~= type(expected_value) then
-               print_fail_reason("Types do not match")
-               return
-            end
 
             --- Mismatched values
             local message
