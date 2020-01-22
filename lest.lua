@@ -3,11 +3,11 @@
 local lest = {
    _VERSION = 'lest 0.0.1',
    _URL = 'http://github.com/Nikaoto/lest',
-   _DESCRIPTION = 'Minimalist adaptable testing library for Lua',
+   _DESCRIPTION = 'Minimal testing library for Lua',
    _LICENSE = [[
       Simplified BSD License
 
-      Copyright (c) 2019 Nika Otiashvili
+      Copyright (c) 2020 Nika Otiashvili
 
       Redistribution and use in source and binary forms, with or without
       modification, are permitted provided that the following conditions are
@@ -97,16 +97,16 @@ local function table_equals(tbl1, tbl2)
 
    -- Check tbl2 subset of tbl1
    -- Here we only need to check if keys that tbl2 has exist in tbl1
-   -- because if we reached this line, that means
-   -- each value at `key` in tbl1 was also present in tbl2 in the same location
+   -- because if we reached this line, that means each value at `key`
+   -- in tbl1 was also present in tbl2 in the same location
    for k, _ in pairs(tbl2) do
       if tbl1[k] == nil then
          return false
       end
 
-      -- No need to check for table comparison, because
-      -- if v1 and v2 are tables, that means they were compared
-      -- in the previous loop and ended up equal
+      -- No need to check for table comparison, because if v1 and v2
+      -- are tables, that means they were compared in the previous
+      -- loop and ended up equal
    end
 
    return true
